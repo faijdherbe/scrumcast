@@ -10,41 +10,42 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
 
-    <body>
+    <body class="orange lighten-2">
       <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="https://cdn.rawgit.com/showdownjs/showdown/1.3.0/dist/showdown.min.js"></script>
+      <script type="text/javascript" src="https://cdn.rawgit.com/showdownjs/github-extension/1.0.0/dist/showdown-github.min.js"></script>
       <script type="text/javascript" src="js/materialize.min.js"></script>
 
-      <nav>
-	<div class="nav-wrapper">
-	  <a href="#" class="brand-logo center">52/100</a>
+      <div class="container">
+	<div class="row">
+	  <div class="col m12 center">
+	    <h2 class="orange-text"><b>scrumcast</b> <i class="large material-icons">chat</i></h2>
+	  </div>
 	</div>
-      </nav> 
-      
-      <div class="row">
-        <div class="col m10">          
-	  <h4 id="title">Als API ontwikkelaar wil ik dat de volgende non-composer library omgezet wordt naar een Composer dependency: `Apache Log4PHP`</h4>
+	
+	<div class="row">
+          <div class="col m12">
+	    <div class="card white darken-1">
+              <div class="card-content">
+		<h3 id="title"></h3>
+		<h5 id="description" class="hiddendiv"></h5>
+		<h5 id="labels"></h5>
+	      </div>
+	    </div>
+	  </div>
 	</div>
-	<div class="col m2">
-	  <h1 id="estimate">100</h1>
-	</div>
-      </div>
-      <div class="row">
-	<div class="col m12" id="description">
-	  I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.
-	</div>
-      </div>
-      
-      <div class="row">
-	<div class="col m12" id="labels">
-	  <div class="chip">epic.incrowd.api.composer</div>
-	  <div class="chip">select.jeroen</div>
-	  <div class="chip">incrowd.api</div>
-	  <div class="chip">gewoon testen</div>
-	</div>
-      </div>
 
-
+	<div class="row">
+	  <div class="col m12 center">
+	    <h3 class="orange-text">
+	      <i class="small material-icons">schedule</i>
+	      <b id="timer"></b>
+	    </h3>
+	  </div>
+	</div>
+	
+      </div>
       <script type="text/javascript" src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
       <script type="text/javascript" src="js/receiver_main.js"></script>
     </body>
