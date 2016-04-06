@@ -151,8 +151,10 @@ function fetchStory(idx) {
 }
 
 function searchPivotal() {
+    var projectID = $('#project').val();
+    
     jQuery.ajax({
-	url: "https://www.pivotaltracker.com/services/v5/projects/1501280/search?query=" + encodeURIComponent($('#search').val()),
+	url: "https://www.pivotaltracker.com/services/v5/projects/" + projectID + "/search?query=" + encodeURIComponent($('#search').val()),
 	headers: {
 	    "X-TrackerToken": pivotalToken
 	}
@@ -161,14 +163,57 @@ function searchPivotal() {
 	    stories = data.stories.stories;
 	    
 	    $('#stories').html("");
+	    var converter = new showdown.Converter();
+	    
 	    jQuery.each(stories, function(idx, story) {
 		console.log(story);
-		$('#stories').append("<li><a href=\"javascript:sendStory(fetchStory(" + idx + "));\">"  + story.name + "</a></li>"); 
+		var entry = '<div class="col s12 card white hoverable" onClick="javascript:sendStory(fetchStory(' + idx + '));" >' +
+		    '<div class="card-title" >' +
+		    story.name + 
+		 
+		    '</div> ' +
+		    '<div class="card-content">' +
+		    '<p>' + converter.makeHtml(story.description) + '</p>' +
+		    '</div>' +
+		    
+		    '</div> ';
+
+		$('#stories').append(entry);
+		
+//		      + story.name + "</a></li>"); 
 	    });
-	    sendStory(data.stories.stories[0]);
+//	    sendStory({});
 	})
 	.error(function() {
 	    sendStory({ title: "nok" });
 	});
     
 }
+
+function login(form) {
+    var token = $('#pivotaltoken').val();
+    
+    var url = "https://www.pivotaltracker.com/services/v5/me";
+
+    jQuery.ajax({
+	url: url,
+	headers: {
+	    "X-TrackerToken": token
+	}
+    }).success(function(data) {
+	//api_token
+	pivotalToken = token;
+	$('#projects-list').html(
+	    '<select id="project">' + jQuery.map(data.projects, function(p) {
+		return '<option value="'+ p.project_id +'">' + p.project_name + '</option>';
+	    }).join(' ') + '</select>'
+	);
+	$('#login_card').hide();
+	$('#main_card').show();
+	$('select').material_select();
+    }).error(function(data) {
+	console.log('error');
+    });
+}
+
+$('#main_card').hide();
