@@ -1,5 +1,3 @@
-var applicationID = '296983AA';
-var pivotalToken = '';
 var namespace = 'urn:x-cast:net.faijdherbe.pokercast';
 var session = null;
 
