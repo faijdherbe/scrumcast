@@ -121,7 +121,7 @@ function sendStory(story) {
  * @param {string} message A message string
  */
 function appendMessage(message) {
-    console.log(message);
+    //console.log(message);
     //var dw = document.getElementById("debugmessage");
     //dw.innerHTML += '\n' + JSON.stringify(message);
 };
@@ -166,28 +166,48 @@ function searchPivotal() {
 	    var converter = new showdown.Converter();
 	    
 	    jQuery.each(stories, function(idx, story) {
-		console.log(story);
-		var entry = '<div class="col s12 card white hoverable" onClick="javascript:sendStory(fetchStory(' + idx + '));" >' +
-		    '<div class="card-title" >' +
-		    story.name + 
-		 
-		    '</div> ' +
-		    '<div class="card-content">' +
-		    '<p>' + converter.makeHtml(story.description) + '</p>' +
-		    '</div>' +
-		    
-		    '</div> ';
 
-		$('#stories').append(entry);
-		
-//		      + story.name + "</a></li>"); 
+		var entry = '<a href="javascript:selectStory(' + idx + '); " class="collection-item story_' + idx  + '">' + story.name  + '</a>';
+
+		$('#stories').append(entry);		
 	    });
-//	    sendStory({});
+	    currentStoryIndex = -1;
+	    
 	})
 	.error(function() {
 	    sendStory({ title: "nok" });
 	});
     
+}
+
+    $('.story_details').hide();
+var currentStoryIndex = -1;
+function selectStory(idx) {
+    if(-1 != currentStoryIndex) {
+	// deselect
+	$('.story_' + currentStoryIndex).removeClass('active'); 
+    }
+    $('.story_details').show();
+    
+    $('.story_details .card').pushpin({ top: $('.story_details').offset().top });
+
+    $('.story_' + idx).addClass('active'); 
+    currentStoryIndex = idx;
+
+    var story = stories[idx];
+    $("#story_name").text(story.name);
+    //$("#story_estimate").text(story.estimate);
+    if(story.estimate > 0) {
+	$('#story_estimate option[value="' + story.estimate + '"]').prop('selected', true);
+    } else {
+	$('#story_estimate option:eq(0)').prop('selected', true);
+    }	
+    $('select').material_select();
+    
+    $("#story_description").text(story.description);
+    $("#story_labels").text(story.labels);
+
+    sendStory(story);
 }
 
 function login(form) {
@@ -216,4 +236,12 @@ function login(form) {
     });
 }
 
+function updateEstimate(selectInput) {
+    stories[currentStoryIndex].estimate = $("#story_estimate").val();
+    sendStory(stories[currentStoryIndex]);
+    console.log($("#story_estimate").val() + "::::" + stories[currentStoryIndex].estimate );
+}
+
+
 $('#main_card').hide();
+

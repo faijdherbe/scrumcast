@@ -27,39 +27,37 @@
 	-->
 
 
-    <div class="container">
-      
-      <div class="row" id="login_card">
-        <div class="col m8 push-m2">
-          <div class="card white">
-            <div class="card-content">
-              <span class="card-title">Login to Pivotaltracker</span>
-              <p>Please paste your pivotal api token into this field. You can findyour token in your pivotaltracker profile page.</p>
-	      <div class="row">
-		<form class="col s12" action="javascript:login(this);">
-		  <div class="row">
-		    <div class="input-field col s12">
-		      <input id="pivotaltoken" type="text" class="validate">
-		      <label for="pivotaltoken">Pivotal API Token</label>
-		    </div>
+    
+    <div class="row" id="login_card">
+      <div class="col m8 push-m2">
+        <div class="card white">
+          <div class="card-content">
+            <span class="card-title">Login to Pivotaltracker</span>
+            <p>Please paste your pivotal api token into this field. You can findyour token in your pivotaltracker profile page.</p>
+	    <div class="row">
+	      <form class="col s12" action="javascript:login(this);">
+		<div class="row">
+		  <div class="input-field col s12">
+		    <input id="pivotaltoken" type="text" value="" class="validate">
+		    <label for="pivotaltoken">Pivotal API Token</label>
 		  </div>
-		  <div class="row">
-		    <div class="input-field col s1">
-		      <input id="go" type="submit" class="validate">
-		    </div>
+		</div>
+		<div class="row">
+		  <div class="input-field col s1">
+		    <input id="go" type="submit" class="validate">
 		  </div>
-		</form>
-              </div>
-              
+		</div>
+	      </form>
             </div>
-	  </div>
+            
+          </div>
 	</div>
       </div>
+    </div>
 
-      <div class="row" id="main_card">
-	<div class="col s12">
-
-	  
+    <div id="main_card">
+      <div class="row">
+	<div class="col s12 m12 l 12">
 	  <div class="card white">
 	    <div class="card-content">
 	      
@@ -83,11 +81,45 @@
 	      </form>
 	    </div>
 	  </div>
+	</div>
+      </div>
+      
+      <div class="row">
 
-	  <div class="row" id="stories">
-	    
+	<div class="col s12 m6 l4">
+	  <ul class="collection" id="stories">
+	  </ul>
+	</div>
+	
+	<div class="col l8">
+	  <div class="story_details">
+	    <div class="card white">
+	      <div class="card-title">
+		<div class="row">
+		  <div class="col s10"><span id="story_name">askdjfh asdfasdf</span></div>
+		  <div class="input-field col s2" >
+		      <select onChange="javascript:updateEstimate(this)" id="story_estimate" >
+			<option value="-1">--</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="5">5</option>
+			<option value="8">8</option>
+			<option value="13">13</option>
+			<option value="20">20</option>
+			<option value="40">40</option>
+			<option value="100">100</option>
+		      </select>
+		      <label>estimate</label>
+		  </div>
+		</div>
+	      </div>
+	      <div class="card-content">
+		<div  id="story_description">adsfasdf</div>
+		<div  id="story_tags">asdfasdf</div>
+	      </div>
+	    </div>
 	  </div>
-	  
 	</div>
       </div>
     </div>
@@ -100,6 +132,7 @@
     <script type="text/javascript">
       $(document).ready(function() {
       $('select').material_select();
+      $('.story_details .card').pushpin({ top: $('.story_details').offset().top });
       });
     </script>
   </body>

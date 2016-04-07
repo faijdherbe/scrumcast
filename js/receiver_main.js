@@ -36,7 +36,7 @@ window.onload = function() {
 
     // handler for the CastMessageBus message event
     window.messageBus.onMessage = function(event) {
-        console.log('Message [' + event.senderId + ']: ' + event.data);
+        //console.log('Message [' + event.senderId + ']: ' + event.data);
         // display the message from the sender
 	showStory(JSON.parse(event.data));
 	//        displayText(event.data);
@@ -52,11 +52,12 @@ window.onload = function() {
 
 // utility function to display the text message in the input field
 function displayText(text) {
-    console.log(text);
+    //console.log(text);
     document.getElementById("message").innerHTML=text;
     window.castReceiverManager.setApplicationState(text);
 };
 
+var lastStoryId = -1;
 function showStory(data) {
     var defaults = {
 	name: "-",
@@ -79,7 +80,17 @@ function showStory(data) {
     $('#estimate').text(data.estimate);
     $('#labels').text(labels);
     $('#description').html(htmlDescription);
-    start = new Date;
+
+    if(parseInt(data.estimate) > 0) {
+	$('#estimate_container').show();
+    } else {
+	$('#estimate_container').hide();
+    }
+    if(lastStoryId != data.id){
+	start = new Date;
+    }
+    lastStoryId = data.id;
+    console.log(data.id + "::" + data.estimate);
 }
 
 function pretty_time_string(num) {
