@@ -8,6 +8,25 @@
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <style>
+	.estimate_container {;
+	transform: rotate(-12deg);
+	font-size: 200pt;
+	position: fixed;
+	bottom: -25%;
+	right:-10%;
+	opacity: .2;
+	color: black;
+	font-family: "Short Stack";
+	font-weight: bolder;
+	min-width: 500px;
+	min-height: 500px;
+	text-align: center;
+	}
+	.bordered {
+	}
+
+      </style>
     </head>
 
     <body class="orange lighten-2">
@@ -46,6 +65,11 @@
 	</div>
 	
       </div>
+
+      <div id="estimate_container" class="estimate_container">
+	<span id="estimate" class="bordered"></span>
+      </div>
+      
       <script type="text/javascript" src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
       <script type="text/javascript" src="js/receiver_main.js"></script>
     </body>
