@@ -1,5 +1,6 @@
 var namespace = 'urn:x-cast:net.faijdherbe.pokercast';
 var session = null;
+$.cookie.json = true;
 
 /**
  * Call initialization for Cast
@@ -14,8 +15,8 @@ if (!chrome.cast || !chrome.cast.isAvailable) {
 function initializeCastApi() {
     var sessionRequest = new chrome.cast.SessionRequest(applicationID);
     var apiConfig = new chrome.cast.ApiConfig(sessionRequest,
-					      sessionListener,
-					      receiverListener);
+											  sessionListener,
+											  receiverListener);
 
     chrome.cast.initialize(apiConfig, onInitSuccess, onError);
 };
@@ -54,7 +55,7 @@ function onStopAppSuccess() {
 function sessionListener(e) {
     appendMessage('New session ID:' + e.sessionId);
     session = e;
-    session.addUpdateListener(sessionUpdateListener);  
+    session.addUpdateListener(sessionUpdateListener);
     session.addMessageListener(namespace, receiverMessage);
 }
 
@@ -66,7 +67,7 @@ function sessionUpdateListener(isAlive) {
     message += ': ' + session.sessionId;
     appendMessage(message);
     if (!isAlive) {
-	session = null;
+		session = null;
     }
 };
 
@@ -84,10 +85,10 @@ function receiverMessage(namespace, message) {
  */
 function receiverListener(e) {
     if( e === 'available' ) {
-	appendMessage("receiver found");
+		appendMessage("receiver found");
     }
     else {
-	appendMessage("receiver list empty");
+		appendMessage("receiver list empty");
     }
 }
 
@@ -105,14 +106,14 @@ function stopApp() {
  */
 function sendStory(story) {
     if (session!=null) {
-	
-	session.sendMessage(namespace, story, onSuccess.bind(this, "Message sent: " + story), onError);
+
+		session.sendMessage(namespace, story, onSuccess.bind(this, "Message sent: " + story), onError);
     }
     else {
-	chrome.cast.requestSession(function(e) {
+		chrome.cast.requestSession(function(e) {
             session = e;
             session.sendMessage(namespace, story, onSuccess.bind(this, "Message sent: " + story), onError);
-	}, onError);
+		}, onError);
     }
 }
 
@@ -132,7 +133,7 @@ function appendMessage(message) {
 function update() {
     //
     sendStory({
-	title: "dingen"
+		title: "dingen"
     });
 }
 
@@ -152,96 +153,218 @@ function fetchStory(idx) {
 
 function searchPivotal() {
     var projectID = $('#project').val();
-    
-    jQuery.ajax({
-	url: "https://www.pivotaltracker.com/services/v5/projects/" + projectID + "/search?query=" + encodeURIComponent($('#search').val()),
-	headers: {
-	    "X-TrackerToken": pivotalToken
+
+	$.cookie('last-project', projectID);
+
+	var pivoToken = getPivotalToken();
+	if(false == pivoToken) {
+		return;
 	}
+
+	var search = $('#search').val();
+	$.cookie('last-search', search);
+
+    jQuery.ajax({
+		url: "https://www.pivotaltracker.com/services/v5/projects/" + projectID + "/search?query=" + encodeURIComponent(search),
+		headers: {
+			"X-TrackerToken": pivoToken
+		}
     })
-	.success(function(data){
-	    stories = data.stories.stories;
-	    
-	    $('#stories').html("");
-	    var converter = new showdown.Converter();
-	    
-	    jQuery.each(stories, function(idx, story) {
+		.success(function(data){
+			stories = data.stories.stories;
 
-		var entry = '<a href="javascript:selectStory(' + idx + '); " class="collection-item story_' + idx  + '">' + story.name  + '</a>';
+			$('#stories').html("");
 
-		$('#stories').append(entry);		
-	    });
-	    currentStoryIndex = -1;
-	    
-	})
-	.error(function() {
-	    sendStory({ title: "nok" });
-	});
-    
+			jQuery.each(stories, function(idx, story) {
+				var entry = '<div class="col l12 m12 s12 story_'+idx+'" id="story_' +idx+'">' + generateStoryContent(idx, story) + '</div>';
+//				var entry = '<a href="javascript:selectStory(' + idx + '); " class="collection-item story_' + idx  + '">' + story.name  + '</a>';
+
+				$('#stories').append(entry);			});
+
+			 $('.modal-trigger').leanModal();
+			currentStoryIndex = -1;
+
+		})
+		.error(function() {
+			//sendStory({ title: "nok" });
+		});
+
 }
 
-    $('.story_details').hide();
+function updateStoryCard(idx, story) {
+	$('#story_' + idx).html(generateStoryContent(idx, story));
+
+}
+function generateStoryContent(idx, story) {
+
+	var entry = '<div class="card"><div class="card-content">';
+	entry += '<div class="card-title">' + story.name + '</div>';
+	entry += story.labels.map(function(l){
+		return l.name;
+	}).join(', ');
+	entry += '</div><div class="card-action">';
+
+	entry += '<a href="javascript:selectStory(' + idx + ');">open</a>';
+
+	entry += '<a href="javascript:markStory('+idx+')">mark</a>';
+	entry += '<span class="right">' + [story.story_type, story.current_state].join(', ') + '</span>';
+	entry += '</div>';
+
+	return entry;
+}
+
+//$('.story_details').hide();
 var currentStoryIndex = -1;
 function selectStory(idx) {
     if(-1 != currentStoryIndex) {
-	// deselect
-	$('.story_' + currentStoryIndex).removeClass('active'); 
+		// deselect
+		$('.story_' + currentStoryIndex).removeClass('active');
     }
-    $('.story_details').show();
-    
-    $('.story_details .card').pushpin({ top: $('.story_details').offset().top });
+	markStory(idx, false);
+//    $('.story_details').show();
 
-    $('.story_' + idx).addClass('active'); 
+//    $('.story_details .card').pushpin({ top: $('.story_details').offset().top });
+
+    $('.story_' + idx).addClass('active');
     currentStoryIndex = idx;
 
     var story = stories[idx];
     $("#story_name").text(story.name);
     //$("#story_estimate").text(story.estimate);
-    if(story.estimate > 0) {
-	$('#story_estimate option[value="' + story.estimate + '"]').prop('selected', true);
-    } else {
-	$('#story_estimate option:eq(0)').prop('selected', true);
-    }	
-    $('select').material_select();
-    
-    $("#story_description").text(story.description);
-    $("#story_labels").text(story.labels);
+
+
+	if(story.estimate > 0) {
+		$('#story_estimate option[value="' + story.estimate + '"]').prop('selected', true);
+	} else {
+		$('#story_estimate option:eq(0)').prop('selected', true);
+	}
+
+	$('select').material_select();
+
+	var desc = '';
+	if(undefined != story.description) {
+
+		var converter = new showdown.Converter();
+		desc = converter.makeHtml(story.description);
+	}
+
+    $("#story_description").text(desc);
+	$("#story_kind").text(story.story_type);
+	$("#story_state").text(story.current_state);
+    $("#story_labels").html(story.labels.map(function(e) {
+		return '<div class="chip">' + e.name + '</div>';
+	}).join(' '));
 
     sendStory(story);
+
+	$('#story-modal').openModal();
 }
 
-function login(form) {
-    var token = $('#pivotaltoken').val();
-    
-    var url = "https://www.pivotaltracker.com/services/v5/me";
+function reloadStory(idx) {
 
-    jQuery.ajax({
-	url: url,
-	headers: {
-	    "X-TrackerToken": token
+    var projectID = $('#project').val();
+	story = stories[idx];
+
+	var pivoToken = getPivotalToken();
+	if(false == pivoToken) {
+		return;
 	}
-    }).success(function(data) {
-	//api_token
-	pivotalToken = token;
-	$('#projects-list').html(
-	    '<select id="project">' + jQuery.map(data.projects, function(p) {
-		return '<option value="'+ p.project_id +'">' + p.project_name + '</option>';
-	    }).join(' ') + '</select>'
-	);
-	$('#login_card').hide();
-	$('#main_card').show();
-	$('select').material_select();
-    }).error(function(data) {
-	console.log('error');
-    });
+
+	jQuery.ajax({
+		url: "https://www.pivotaltracker.com/services/v5/projects/" + projectID + "/stories/" + story.id,
+		headers: {
+			"X-TrackerToken": pivoToken
+		}
+    }).success(function(data){
+		stories[idx] = data;
+		updateStoryCard(idx, data);
+		selectStory(idx);
+
+	}) .error(function() {
+	});
+}
+
+
+function openInPivotal(storyId) {
+	window.open('https://pivotaltracker.com/story/show/'+ fetchStory(storyId).id, '_blank');
 }
 
 function updateEstimate(selectInput) {
-    stories[currentStoryIndex].estimate = $("#story_estimate").val();
-    sendStory(stories[currentStoryIndex]);
+
+    var projectID = $('#project').val();
+
+	var pivoToken = getPivotalToken();
+	if(false == pivoToken) {
+		return;
+	}
+	var idx = currentStoryIndex;
+
+
+    stories[idx].estimate = $("#story_estimate").val();
+	story = stories[idx];
+    sendStory(story);
+
+
+	jQuery.ajax({
+		url: "https://www.pivotaltracker.com/services/v5/projects/" + projectID + "/stories/" + story.id,
+		type: 'PUT',
+		contentType: 'application/json',
+		headers: {
+			"X-TrackerToken": pivoToken
+		},
+		data: '{"estimate": ' + story.estimate + '}'
+    }).success(function(data){
+		stories[idx] = data;
+		updateStoryCard(idx, data);
+		selectStory(idx);
+
+	}) .error(function() {
+	});
+
     console.log($("#story_estimate").val() + "::::" + stories[currentStoryIndex].estimate );
 }
 
 
-$('#main_card').hide();
+function getPivotalToken() {
+	var token = $.cookie('pivotal-token');
+	if(undefined == token) {
+		document.location = '/';
+		return false;
+	}
+	return token;
+}
 
+function markStory(idx, toggle = true) {
+	var elem = $('.story_' + idx + ' .card');
+	var css = 'orange lighten-5';
+	if(toggle) {
+		elem.toggleClass(css);
+	} else {
+		elem.addClass(css);
+	}
+}
+
+/// bootstrap
+$(document).ready(function() {
+
+	if(false == getPivotalToken) {
+		return;
+	}
+	$.cookie.json = true;
+
+	var me = $.cookie('pivotal-me');
+
+	$('#projects-list').html(
+		'<select id="project">' + jQuery.map(me.projects, function(p) {
+			return '<option value="'+ p.project_id +'">' + p.project_name + '</option>';
+		}).join(' ') + '</select>'
+	);
+
+	if (undefined != (lastSearch = $.cookie('last-search'))) {
+		$('#search').val(lastSearch);
+	}
+	if (undefined != (lastProject = $.cookie('last-project'))) {
+		$('#projects-list option[value="' + lastProject + '"]').prop('selected', true);
+	}
+
+});
