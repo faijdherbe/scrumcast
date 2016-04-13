@@ -328,7 +328,7 @@ function updateEstimate(selectInput) {
 function getPivotalToken() {
 	var token = $.cookie('pivotal-token');
 	if(undefined == token) {
-		document.location = 'index.php';
+		document.location = 'index.html';
 		return false;
 	}
 	return token;
