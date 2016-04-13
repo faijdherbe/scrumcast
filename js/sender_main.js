@@ -347,7 +347,7 @@ function markStory(idx, toggle = true) {
 /// bootstrap
 $(document).ready(function() {
 
-	if(false == getPivotalToken) {
+	if(false == getPivotalToken()) {
 		return;
 	}
 	$.cookie.json = true;
