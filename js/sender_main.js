@@ -360,11 +360,12 @@ function loadActivity(idx) {
 					var commentString = '';
 
 					commentString +=   '<div class="card col l12 s12 m12">';
-					commentString +=     '<div class="card-title">' + c.person.name + '</div>';
 					commentString +=     '<div class="card-content">';
-					commentString +=       getConverter().makeHtml(c.text);
+
+					commentString +=     '<span class="card-title">' + c.person.name + '</span>';
+					commentString +=     '<div class="section"><p>' + getConverter().makeHtml(c.text) + '</p></div>';
+					commentString +=  	 '<div class="section"><span class="right grey-text text-lighten-1"><i>' + c.created_at + '</i></span></div>';
 					commentString +=     '</div>';
-					commentString +=  	 '<div class="card-footer"><span class="right grey-text text-darken-1">' + c.created_at + '</span></div>';
 					commentString +=   '</div>';
 
 
