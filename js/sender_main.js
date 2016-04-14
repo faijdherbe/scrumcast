@@ -165,13 +165,14 @@ function searchPivotal() {
 	$.cookie('last-search', search);
 
     jQuery.ajax({
-		url: "https://www.pivotaltracker.com/services/v5/projects/" + projectID + "/search?query=" + encodeURIComponent(search),
+		url: "https://www.pivotaltracker.com/services/v5/projects/" + projectID + "/search?query=" + encodeURIComponent(search) + '&fields=:default,stories(stories(:default,comments(:default,person)))',
 		headers: {
 			"X-TrackerToken": pivoToken
 		}
     })
 		.success(function(data){
 			stories = data.stories.stories;
+			console.log(stories);
 
 			$('#stories').html("");
 
@@ -258,7 +259,9 @@ function selectStory(idx) {
     sendStory(story);
 
 	$('.story-activity-container').html('');
-	$('.story-activity-button').show();
+//	$('.story-activity-button').show();
+
+	loadActivity(idx);
 
 	$('#story-modal').openModal();
 }
@@ -274,11 +277,12 @@ function reloadStory(idx) {
 	}
 
 	jQuery.ajax({
-		url: "https://www.pivotaltracker.com/services/v5/projects/" + projectID + "/stories/" + story.id,
+		url: "https://www.pivotaltracker.com/services/v5/projects/" + projectID + "/stories/" + story.id + '?fields=:default,comments(:default,person)',
 		headers: {
 			"X-TrackerToken": pivoToken
 		}
     }).success(function(data){
+		console.log(data);
 		stories[idx] = data;
 		updateStoryCard(idx, data);
 		selectStory(idx);
@@ -339,13 +343,19 @@ function loadActivity(idx) {
 
     var projectID = $('#project').val();
 	story = stories[idx];
+	$('.story-activity-button').hide();
 
+	if(undefined == story.comments) {
+
+		return;
+	}
+/*
 	var pivoToken = getPivotalToken();
 	if(false == pivoToken) {
 		return;
 	}
 
-	$('.story-activity-button').hide();
+
 
 	jQuery.ajax({
 		url: "https://www.pivotaltracker.com/services/v5/projects/" + projectID + "/stories/" + story.id + '/comments?fields=person,text,created_at',
@@ -353,7 +363,8 @@ function loadActivity(idx) {
 			"X-TrackerToken": pivoToken
 		}
     }).success(function(data){
-
+*/
+	data = story.comments;
 		$(".story-activity-container").html(
 			'<div class="row">'
 				+ jQuery.map(data, function(c) {
@@ -373,9 +384,10 @@ function loadActivity(idx) {
 				}).join('')
 				+ '</div>'
 		);
-
+/*
 	}) .error(function() {
 	});
+*/
 }
 
 function getPivotalToken() {
