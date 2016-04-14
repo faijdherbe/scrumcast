@@ -172,7 +172,6 @@ function searchPivotal() {
     })
 		.success(function(data){
 			stories = data.stories.stories;
-			console.log(stories);
 
 			$('#stories').html("");
 
@@ -282,7 +281,6 @@ function reloadStory(idx) {
 			"X-TrackerToken": pivoToken
 		}
     }).success(function(data){
-		console.log(data);
 		stories[idx] = data;
 		updateStoryCard(idx, data);
 		selectStory(idx);
