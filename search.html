@@ -46,42 +46,56 @@
 		<!-- Modal Structure -->
 		<div id="story-modal" class="modal modal-fixed-footer">
 			<div class="modal-content">
-				<div class="row">
-					<div class="col l10 m12 s12"><h5><span id="story_name">askdjfh asdfasdf</span></h5></div>
+				<div class="section">
+					<div class="row">
+						<div class="col l10 m12 s12"><h5><span id="story_name">askdjfh asdfasdf</span></h5></div>
 
-					<div class="input-field col l2 m12 s12" >
-						<select onChange="javascript:updateEstimate(this)" id="story_estimate" >
-							<option value="-1">--</option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="5">5</option>
-							<option value="8">8</option>
-							<option value="13">13</option>
-							<option value="20">20</option>
-							<option value="40">40</option>
-							<option value="100">100</option>
-						</select>
-						<label>estimate</label>
+						<div class="input-field col l2 m12 s12" >
+							<select onChange="javascript:updateEstimate(this)" id="story_estimate" >
+								<option value="-1">--</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="5">5</option>
+								<option value="8">8</option>
+								<option value="13">13</option>
+								<option value="20">20</option>
+								<option value="40">40</option>
+								<option value="100">100</option>
+							</select>
+							<label>estimate</label>
+						</div>
+						<div class="col l6 m6 s12" id="story_kind">feature</div>
+						<div class="col l6 m6 s12" id="story_state">unstarted</div>
 					</div>
-					<div class="col l6 m6 s12" id="story_kind">feature</div>
-					<div class="col l6 m6 s12" id="story_state">unstarted</div>
-				</div>
-				<div class="row darken-2">
-					<div  id="story_labels" class="col s12 m12 l12">
-						<div class="chip" >label</div>
-						<div class="chip" >label</div>
-						<div class="chip" >label</div>
-						<div class="chip" >label</div>
-						<div class="chip" >label</div>
-						<div class="chip" >label</div>
-						<div class="chip" >label</div>
+					<div class="row darken-2">
+						<div  id="story_labels" class="col s12 m12 l12">
+							<div class="chip" >label</div>
+							<div class="chip" >label</div>
+							<div class="chip" >label</div>
+							<div class="chip" >label</div>
+							<div class="chip" >label</div>
+							<div class="chip" >label</div>
+							<div class="chip" >label</div>
+						</div>
 					</div>
-				</div>
-				<div class="row">
+					<div class="row">
 
-					<div  id="story_description" class="col l12 m12 s12">description</div>
+						<div  id="story_description" class="col l12 m12 s12">description</div>
+					</div>
 				</div>
+				<div class="divider"></div>
+				<div class="section story-activity-section">
+					<div class="center" >
+						<a class="btn waves-effect waves-light orange story-activity-button"  href="javascript:loadActivity(currentStoryIndex)">load activity</a>
+					</div>
+					<div class="story-activity-container">
+
+					</div>
+
+				</div>
+
+
 			</div>
 			<div class="modal-footer">
 				<a href="javascript:openInPivotal(currentStoryIndex)" class="modal-action waves-effect waves-orange btn-flat">open in pivotal</a>
@@ -97,7 +111,7 @@
 		<script type="text/javascript">
 		 $(document).ready(function() {
 			 $('select').material_select();
-//			 $('.search-header .row').pushpin({ top: 0 });
+			 //			 $('.search-header .row').pushpin({ top: 0 });
 		 });
 		</script>
 	</body>

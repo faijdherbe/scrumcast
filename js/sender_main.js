@@ -244,11 +244,11 @@ function selectStory(idx) {
 	var desc = '';
 	if(undefined != story.description) {
 
-		var converter = new showdown.Converter();
-		desc = converter.makeHtml(story.description);
+
+		desc = getConverter().makeHtml(story.description);
 	}
 
-    $("#story_description").text(desc);
+    $("#story_description").html(desc);
 	$("#story_kind").text(story.story_type);
 	$("#story_state").text(story.current_state);
     $("#story_labels").html(story.labels.map(function(e) {
@@ -256,6 +256,9 @@ function selectStory(idx) {
 	}).join(' '));
 
     sendStory(story);
+
+	$('.story-activity-container').html('');
+	$('.story-activity-button').show();
 
 	$('#story-modal').openModal();
 }
@@ -324,6 +327,55 @@ function updateEstimate(selectInput) {
     console.log($("#story_estimate").val() + "::::" + stories[currentStoryIndex].estimate );
 }
 
+function getConverter() {
+	var converter = new showdown.Converter({
+		simplifiedAutoLink: true,
+		strikethrough: true,
+	});
+	return converter;
+}
+
+function loadActivity(idx) {
+
+    var projectID = $('#project').val();
+	story = stories[idx];
+
+	var pivoToken = getPivotalToken();
+	if(false == pivoToken) {
+		return;
+	}
+
+	$('.story-activity-button').hide();
+
+	jQuery.ajax({
+		url: "https://www.pivotaltracker.com/services/v5/projects/" + projectID + "/stories/" + story.id + '/comments?fields=person,text,created_at',
+		headers: {
+			"X-TrackerToken": pivoToken
+		}
+    }).success(function(data){
+
+		$(".story-activity-container").html(
+			'<div class="row">'
+				+ jQuery.map(data, function(c) {
+					var commentString = '';
+
+					commentString +=   '<div class="card col l12 s12 m12">';
+					commentString +=     '<div class="card-title">' + c.person.name + '</div>';
+					commentString +=     '<div class="card-content">';
+					commentString +=       getConverter().makeHtml(c.text);
+					commentString +=     '</div>';
+					commentString +=  	 '<div class="card-footer"><span class="right grey-text text-darken-1">' + c.created_at + '</span></div>';
+					commentString +=   '</div>';
+
+
+					return commentString;
+				}).join('')
+				+ '</div>'
+		);
+
+	}) .error(function() {
+	});
+}
 
 function getPivotalToken() {
 	var token = $.cookie('pivotal-token');
