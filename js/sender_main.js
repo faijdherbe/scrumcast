@@ -233,11 +233,13 @@ function selectStory(idx) {
     //$("#story_estimate").text(story.estimate);
 
 
-	if(story.estimate > 0) {
+	if(story.estimate >= 0) {
 		$('#story_estimate option[value="' + story.estimate + '"]').prop('selected', true);
 	} else {
 		$('#story_estimate option:eq(0)').prop('selected', true);
 	}
+
+	$('#story_type option[value="' + story.story_type + '"]').prop('selected', true);
 
 	$('select').material_select();
 
@@ -328,6 +330,43 @@ function updateEstimate(selectInput) {
 
     console.log($("#story_estimate").val() + "::::" + stories[currentStoryIndex].estimate );
 }
+
+
+function updateStoryType(selectInput) {
+
+    var projectID = $('#project').val();
+
+	var pivoToken = getPivotalToken();
+	if(false == pivoToken) {
+		return;
+	}
+	var idx = currentStoryIndex;
+
+
+    stories[idx].story_type = $("#story_type").val();
+	story = stories[idx];
+    sendStory(story);
+
+
+	jQuery.ajax({
+		url: "https://www.pivotaltracker.com/services/v5/projects/" + projectID + "/stories/" + story.id,
+		type: 'PUT',
+		contentType: 'application/json',
+		headers: {
+			"X-TrackerToken": pivoToken
+		},
+		data: '{"story_type": "' + story.story_type + '"}'
+    }).success(function(data){
+		stories[idx] = data;
+		updateStoryCard(idx, data);
+		selectStory(idx);
+
+	}) .error(function() {
+	});
+
+    console.log($("#story_estimate").val() + "::::" + stories[currentStoryIndex].estimate );
+}
+
 
 function getConverter() {
 	var converter = new showdown.Converter({
