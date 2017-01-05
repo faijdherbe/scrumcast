@@ -1,78 +1,42 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!--Import Google Icon Font-->
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+    <link type="text/css" rel="stylesheet" href="css/new_receiver.css" />
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <style>
-	  .estimate_container {;
-	  transform: rotate(-12deg);
-	  font-size: 200pt;
-	  position: fixed;
-	  bottom: -25%;
-	  right:-10%;
-	  opacity: .2;
-	  color: black;
-	  font-family: "Short Stack";
-	  font-weight: bolder;
-	  min-width: 500px;
-	  min-height: 500px;
-	  text-align: center;
-	  }
-	  .bordered {
-	  }
 
-    </style>
   </head>
 
-  <body class="orange lighten-2">
+  <body>
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="https://cdn.rawgit.com/showdownjs/showdown/1.3.0/dist/showdown.min.js"></script>
     <script type="text/javascript" src="https://cdn.rawgit.com/showdownjs/github-extension/1.0.0/dist/showdown-github.min.js"></script>
-    <script type="text/javascript" src="js/materialize.min.js"></script>
 
-    <div class="container">
-	  <div class="row">
-		<div class="col m12 center">
-	      <h2 class="orange-text"><b>scrumcast</b> <i class="large material-icons">chat</i></h2>
-		</div>
+	<div id="statusbar" class="statusbar">
+	  <span class="item col_3"><span class="value" id="story_id">#12345648</span></span>
+	  <span class="item col_3"><span class="value" id="story_type">feature</span></span>
+	  <span class="item col_3">estimate: <span class="value" id="estimate">3</span></span>
+	</div>
+
+	<div class="story">
+	  <div class="content">
+		<p id="title">Als scrumlid wil ik dat de scrumcast uitgebreid wordt met de optie voor het zetten van 0 punten, switchen naar chores en dat het issuenummer in beeld staat</p>
+		<p id="labels" class="labels"></p>
 	  </div>
+	</div>
 
-	  <div class="row">
-		<div class="col m12">
-	      <div class="card white darken-1">
-			<div class="card-content">
-			  <h5 id="header"></h5>
-			  <h3 id="title"></h3>
-			  <h5 id="description" class="hiddendiv"></h5>
-			  <h5 id="labels"></h5>
-			</div>
-		  </div>
-		</div>
-	  </div>
 
-	  <div class="row">
-		<div class="col m12 center">
-	      <h3 class="orange-text">
-			<i class="small material-icons">schedule</i>
-			<b id="timer"></b>
-	      </h3>
-		</div>
-	  </div>
 
-    </div>
-
-    <div id="estimate_container" class="estimate_container">
-	  <span id="estimate" class="bordered"></span>
-    </div>
+	<div class="statusfooter">
+	  <span id="timer" class="item">00:02:23</span>
+	</div>
 
     <script type="text/javascript" src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
     <script type="text/javascript" src="js/receiver_main.js"></script>
+	<script>$('body').hide();</script>
   </body>
 
 </html>

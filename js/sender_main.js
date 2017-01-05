@@ -312,6 +312,12 @@ function updateEstimate(selectInput) {
     sendStory(story);
 
 
+	var estimate = story.estimate;
+	if(estimate == "-1") {
+		estimate = "null";
+	}
+
+
 	jQuery.ajax({
 		url: "https://www.pivotaltracker.com/services/v5/projects/" + projectID + "/stories/" + story.id,
 		type: 'PUT',
@@ -319,7 +325,7 @@ function updateEstimate(selectInput) {
 		headers: {
 			"X-TrackerToken": pivoToken
 		},
-		data: '{"estimate": ' + story.estimate + '}'
+		data: '{"estimate": ' + estimate + '}'
     }).success(function(data){
 		stories[idx] = data;
 		updateStoryCard(idx, data);

@@ -1,0 +1,76 @@
+body, html {
+	padding: 0;
+	margin: 0;
+	zoom: 1.5;
+	background-color: #CCC;
+}
+
+.statusbar {
+	color: white;
+	width: 100%;
+	float: left;
+	display: table;
+}
+
+.statusfooter {
+	color: #333;
+	width:100%;
+	position:absolute;
+	bottom: 0px;
+	text-align:center;
+}
+.statusfooter .item {
+
+	height: 2em;
+}
+
+.statusbar .item {
+	display: table-cell;
+	text-align: center;
+	height: 2em;
+	vertical-align: middle;
+}
+
+.statusbar .item .value {
+	font-weight: bold;
+}
+
+.col_3 {
+	width: 33%;
+}
+
+.story {
+	position: absolute;
+	width: 100%;
+	top: 3em;
+
+}
+
+.labels {
+	color: #666;
+	font-size: small;
+	font-style: italic;
+}
+
+.content {
+	position:relative;
+	left: 15%;
+	width: 70%;
+	font-family: serif;
+}
+
+.chore {
+	background-color: hsla(0, 0%, 10%, 0.7);;
+}
+
+.feature {
+	background-color: hsla(63, 100%, 10%, 0.7);;
+}
+
+.release {
+	background-color: hsla(243, 100%, 10%, 0.7);;
+}
+
+.bug {
+	background-color: hsla(0, 100%, 10%, 0.7);;
+}

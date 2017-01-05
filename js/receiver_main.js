@@ -68,30 +68,42 @@ function showStory(data) {
 
     data = $.extend({}, defaults, data);
 
-    var converter = new showdown.Converter(),
-		htmlTitle = converter.makeHtml(data.name),
+	$('body').show();
+
+    var converter = new showdown.Converter();
+	converter.setFlavor('github');
+
+	var	htmlTitle = converter.makeHtml(data.name),
 		htmlDescription = converter.makeHtml(data.description);
 
     var labels = jQuery.map( data.labels, function( l ) {
 		return l.name;
     }).join(', ');
 
+	var estimate = data.estimate;
+
+	if("-1" == data.estimate || "-" == data.estimate) {
+		estimate = "?";
+	}
+
     $('#title').html(htmlTitle);
-    $('#estimate').text(data.estimate);
+    $('#estimate').text(estimate);
     $('#labels').text(labels);
     $('#description').html(htmlDescription);
-	$('#header').text(data.story_type + ": #" + data.id);
+	$('#story_type').text(data.story_type);
+	$('#story_id').text('#' + data.id);
 
-    if(parseInt(data.estimate) >= 0) {
-		$('#estimate_container').show();
-    } else {
-		$('#estimate_container').hide();
-    }
     if(lastStoryId != data.id){
 		start = new Date;
     }
     lastStoryId = data.id;
     console.log(data.id + "::" + data.estimate);
+
+	$('#statusbar').removeClass('chore');
+	$('#statusbar').removeClass('release');
+	$('#statusbar').removeClass('bug');
+	$('#statusbar').removeClass('feature');
+	$('#statusbar').addClass(data.story_type);
 }
 
 function pretty_time_string(num) {
