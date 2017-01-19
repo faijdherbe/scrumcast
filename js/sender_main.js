@@ -109,7 +109,7 @@ function sendStory(story) {
 	var progress = "";
 
 	if(stories.length > 0 && -1 != currentStoryIndex) {
-		progress = round(100*(currentStoryIndex / stories.length)) + "%";
+		progress = Math.round(100*(currentStoryIndex / stories.length)) + "%";
 	}
 
 	var data = $.extend({}, {
