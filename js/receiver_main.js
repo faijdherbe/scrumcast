@@ -63,7 +63,8 @@ function showStory(data) {
 		name: "-",
 		estimate: "-",
 		labels: ["a", "b"],
-		description: "-"
+		description: "-",
+		progress: ""
     };
 
     data = $.extend({}, defaults, data);
@@ -92,6 +93,7 @@ function showStory(data) {
     $('#description').html(htmlDescription);
 	$('#story_type').text(data.story_type);
 	$('#story_id').text('#' + data.id);
+	$('#progress').text(data.progress);
 
     if(lastStoryId != data.id){
 		start = new Date;

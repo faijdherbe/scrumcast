@@ -105,14 +105,27 @@ function stopApp() {
  * @param {string} message A message string
  */
 function sendStory(story) {
+
+	var progress = "";
+
+	if(stories.length > 0 && -1 != currentStoryIndex) {
+		progress = (currentStoryIndex / stories.length) + "%";
+	}
+
+	var data = $.extend({}, {
+		progress: progress
+	}, story);
+
     if (session!=null) {
 
-		session.sendMessage(namespace, story, onSuccess.bind(this, "Message sent: " + story), onError);
+		session.sendMessage(namespace, data, onSuccess.bind(this, "Message sent: " + data), onError);
     }
     else {
+
+
 		chrome.cast.requestSession(function(e) {
             session = e;
-            session.sendMessage(namespace, story, onSuccess.bind(this, "Message sent: " + story), onError);
+            session.sendMessage(namespace, data, onSuccess.bind(this, "Message sent: " + data), onError);
 		}, onError);
     }
 }
