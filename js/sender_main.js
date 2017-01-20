@@ -109,7 +109,7 @@ function sendStory(story) {
 	var progress = "";
 
 	if(stories.length > 0 && -1 != currentStoryIndex) {
-		progress = round(100*(currentStoryIndex / stories.length)) + "%";
+		progress = (currentStoryIndex+1) + "/"+ stories.length;
 	}
 
 	var data = $.extend({}, {
@@ -185,6 +185,71 @@ function searchPivotal() {
     })
 		.success(function(data){
 			stories = data.stories.stories;
+			loadStories(stories);
+		})
+		.error(function() {
+			//sendStory({ title: "nok" });
+		});
+
+}
+
+
+function showPreviousSprint() {
+    var projectID = $('#project').val();
+
+	$.cookie('last-project', projectID);
+
+	var pivoToken = getPivotalToken();
+	if(false == pivoToken) {
+		return;
+	}
+	var currentSprintQuery = "/iterations?limit=1&offset=-1&scope=done&fields=:default,stories(:default,comments(:default,person))";
+
+    jQuery.ajax({
+		url: "https://www.pivotaltracker.com/services/v5/projects/" + projectID + currentSprintQuery,
+		headers: {
+			"X-TrackerToken": pivoToken
+		}
+    })
+		.success(function(data){
+			stories = data[0].stories;
+			console.log(data);
+			loadStories(stories);
+		})
+		.error(function() {
+			//sendStory({ title: "nok" });
+		});
+}
+
+function showCurrentSprint() {
+    var projectID = $('#project').val();
+
+	$.cookie('last-project', projectID);
+
+	var pivoToken = getPivotalToken();
+	if(false == pivoToken) {
+		return;
+	}
+	var currentSprintQuery = "/iterations?limit=1&offset=0&scope=current&fields=:default,stories(:default,comments(:default,person))";
+
+    jQuery.ajax({
+		url: "https://www.pivotaltracker.com/services/v5/projects/" + projectID + currentSprintQuery,
+		headers: {
+			"X-TrackerToken": pivoToken
+		}
+    })
+		.success(function(data){
+			stories = data[0].stories;
+			console.log(stories);
+			loadStories(stories);
+		})
+		.error(function() {
+			//sendStory({ title: "nok" });
+		});
+}
+
+function loadStories(stories) {
+
 
 			$('#stories').html("");
 
@@ -196,11 +261,6 @@ function searchPivotal() {
 
 			 $('.modal-trigger').leanModal();
 			currentStoryIndex = -1;
-
-		})
-		.error(function() {
-			//sendStory({ title: "nok" });
-		});
 
 }
 
