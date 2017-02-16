@@ -184,7 +184,7 @@ function searchPivotal() {
 		}
     })
 		.success(function(data){
-			stories = data.stories.stories;
+			stories = data.stories.stories.reverse();
 			loadStories(stories);
 		})
 		.error(function() {
