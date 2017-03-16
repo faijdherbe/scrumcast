@@ -86,7 +86,7 @@ function startCanvas(canvasID, peerJsKey) {
     	);
 		var y = ctx.canvas.height - 40 + offset;
 		
-		ctx.font = "20px Georgia";
+		ctx.font = "30px Georgia";
 		ctx.fillText(
 				this.name,
 				width * 0.5 + x,

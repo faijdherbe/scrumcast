@@ -59,7 +59,7 @@ body {
     background-color: #4D5D66;
 }
 
-.profile input {
+#profile input {
     width: 100%;
     background: transparent;
     border: none;
