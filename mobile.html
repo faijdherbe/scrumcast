@@ -1,0 +1,51 @@
+<html>
+  <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
+	<meta name="theme-color" content="#EEE0C3" />
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="http://cdn.peerjs.com/0.3/peer.min.js"></script>
+	<script src="js/p2p_client.js"></script>
+	<link type="text/css" rel="stylesheet" href="css/p2p-mobile.css" />
+  </head>
+  
+  <body>
+  	<div id="connecting">
+  		<div style="text-align: center; width: 100%; margin: 6em auto;>">please wait while connecting to host... </div><br/>
+  		<div class="btn" onclick="javascript:location.reload();"><span>retry</span></div>
+  	</div>
+  	<div id="profile" class="hidden">
+  		<input id="name" type="text" style="width: 100%;" value="your name"/>
+  		<div style="margin: 50px auto 50px auto; clear: both;">
+  		<img class="avatar avatar_1" src="img/avatar/1.png" onclick="javascript:selectAvatar(1)"/>
+  		<img class="avatar avatar_2" src="img/avatar/2.png" onclick="javascript:selectAvatar(2)"/>
+  		<img class="avatar avatar_3" src="img/avatar/3.png" onclick="javascript:selectAvatar(3)"/>
+  		<img class="avatar avatar_4" src="img/avatar/4.png" onclick="javascript:selectAvatar(4)"/>
+  		<img class="avatar avatar_5" src="img/avatar/5.png" onclick="javascript:selectAvatar(5)"/>
+  		<img class="avatar avatar_6" src="img/avatar/6.png" onclick="javascript:selectAvatar(6)"/>
+  		<img class="avatar avatar_7" src="img/avatar/7.png" onclick="javascript:selectAvatar(7)"/>
+  		<img class="avatar avatar_8" src="img/avatar/8.png" onclick="javascript:selectAvatar(8)"/>
+  		<img class="avatar avatar_9" src="img/avatar/9.png" onclick="javascript:selectAvatar(9)"/>
+  		<img class="avatar avatar_10" src="img/avatar/10.png" onclick="javascript:selectAvatar(10)"/>
+  		<img class="avatar avatar_11" src="img/avatar/11.png" onclick="javascript:selectAvatar(11)"/>
+  		<img class="avatar avatar_12" src="img/avatar/12.png" onclick="javascript:selectAvatar(12)"/>
+  		<img class="avatar avatar_13" src="img/avatar/13.png" onclick="javascript:selectAvatar(13)"/>
+  		<img class="avatar avatar_16" src="img/avatar/16.png" onclick="javascript:selectAvatar(16)"/>
+  		<img class="avatar avatar_17" src="img/avatar/17.png" onclick="javascript:selectAvatar(17)"/>
+  		</div>
+  		<div class="btn" onclick="javascript:register();"><span>Login</span></div>
+  	</div>
+	<div id="pokercards" class="container hidden">
+		<div class="card" onclick="javascript:sendPoints(0);">0</div>
+		<div class="card" onclick="javascript:sendPoints(1);">1</div>
+		<div class="card" onclick="javascript:sendPoints(2);">2</div>
+		<div class="card" onclick="javascript:sendPoints(3);">3</div>
+		<div class="card" onclick="javascript:sendPoints(5);">5</div>
+		<div class="card" onclick="javascript:sendPoints(8);">8</div>
+		<div class="card" onclick="javascript:sendPoints('K');">K</div>
+		<div class="card" onclick="javascript:sendPoints('?');">?</div>
+		<div class="card" onclick="javascript:sendPoints(undefined);">C</div>
+	<div style="display: block; clear: both;"></div>
+	</div>
+  </body>
+</html>

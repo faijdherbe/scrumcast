@@ -1,8 +1,13 @@
 body, html {
 	padding: 0;
 	margin: 0;
-	zoom: 1.5;
+/*	zoom: 1.5; */
 	background-color: white;
+	font-size: xx-large;
+}
+
+canvas {
+/*	zoom: 0.5; */
 }
 
 .statusbar {
@@ -22,7 +27,7 @@ body, html {
 .statusfooter .item {
 
 	height: 2em;
-	font-size: x-small;
+	font-size: x-large;
 }
 
 .statusbar .item {
@@ -49,7 +54,7 @@ body, html {
 
 .labels {
 	color: #666;
-	font-size: xx-small;
+	font-size: large;
 	font-style: italic;
 }
 

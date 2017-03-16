@@ -6,6 +6,7 @@
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<script src="http://cdn.peerjs.com/0.3/peer.min.js"></script>
 
   </head>
 
@@ -28,16 +29,19 @@
 	  </div>
 	</div>
 
+	<canvas id="canvas" style="position: absolute; left: 0px; top: 0px;"></canvas>
 
 
 	<div class="statusfooter">
 	  <span id="timer" class="item">00:02:23</span>
 	  <span id="progress" class="item">64%</span>
 	</div>
+	
 
     <script type="text/javascript" src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
     <script type="text/javascript" src="js/receiver_main.js"></script>
-	<script>$('body').hide();</script>
+	<script src="js/p2p.js"></script>
+	<script>//$('body').hide();</script>
   </body>
 
 </html>
