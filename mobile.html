@@ -1,0 +1,52 @@
+<html>
+  <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
+	<meta name="theme-color" content="#EEE0C3" />
+
+
+	<script src="http://cdn.peerjs.com/0.3/peer.min.js"></script>
+	<script src="js/p2p_client.js"></script>
+	<style>
+	  html, body {
+	  margin: 0;
+	  padding: 0;
+	  background-color: #EEE0C3;
+	  }
+	  .container {
+	  margin: 0 auto;
+	  }
+	  .card {
+	    text-align: center;
+	  float: left;
+	  width: 31%;
+	  height: 31%;
+	  margin: 1%;
+
+	  background-color: #5A6D73;
+	  font-size: 3em;
+	  line-height: 4em;
+	  color: #EEE0C3
+	  }
+	  .card:active {
+	  background-color: #4D5D66;
+
+	  }
+
+
+	</style>
+  </head>
+  <body>
+	<div class="container">
+	<div class="card" onclick="javascript:sendPoints(0);">0</div>
+	<div class="card" onclick="javascript:sendPoints(1);">1</div>
+	<div class="card" onclick="javascript:sendPoints(2);">2</div>
+	<div class="card" onclick="javascript:sendPoints(3);">3</div>
+	<div class="card" onclick="javascript:sendPoints(5);">5</div>
+	<div class="card" onclick="javascript:sendPoints(8);">8</div>
+	<div class="card" onclick="javascript:sendPoints('K');">K</div>
+	<div class="card" onclick="javascript:sendPoints('?');">?</div>
+	<div class="card" onclick="javascript:sendPoints(undefined);">C</div>
+	<div style="display: block; clear: both;"></div>
+	</div>
+  </body>
+</html>
