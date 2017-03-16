@@ -58,3 +58,14 @@ body {
 .btn:hover, .btn:active {
     background-color: #4D5D66;
 }
+
+.profile input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    text-align: center;
+    border-bottom: 3px solid black;
+    font-size: x-large;
+    margin: 2em 0 1em 0;
+    line-height: 2em;
+}
