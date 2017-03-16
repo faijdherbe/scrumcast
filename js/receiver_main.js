@@ -106,6 +106,7 @@ function showStory(data) {
 	$('#statusbar').removeClass('bug');
 	$('#statusbar').removeClass('feature');
 	$('#statusbar').addClass(data.story_type);
+	resetAll();
 }
 
 function pretty_time_string(num) {
