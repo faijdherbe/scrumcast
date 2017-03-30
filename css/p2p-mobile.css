@@ -6,19 +6,32 @@ body {
 }
 
 .container {
-    margin: 0 auto;
+    margin: 0;
+    display: table;
+    width:100%;
+    height: 100%;
+    border-collapse: collapse;
 }
 
 .card {
     text-align: center;
-    float: left;
-    width: 31%;
-    height: 31%;
-    margin: 1%;
+    border: 1px solid #EEE0C3;
     background-color: #5A6D73;
-    font-size: 3em;
-    line-height: 4em;
-    color: #EEE0C3
+    font-size: 4em;
+    color: #EEE0C3;
+    display: table-cell;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.card.selected {
+    background-color: #738A92;
+
+}
+
+.avatars {
+    margin: 50px auto;
+    clear: both;
 }
 
 .avatar {
@@ -27,9 +40,13 @@ body {
     width: 80px;
     height: 80px;
     margin: 5px;
+    cursor: pointer;
+    padding: 2px;
 }
-.avatar + .selected {
+
+.avatar.selected {
     background: #FFF;
+    border-radius: 4px;
 }
 
 .card:active {
@@ -50,6 +67,8 @@ body {
     color: #EEE0C3;
     text-align: center;
     clear: both;
+    cursor: pointer;
+    margin-bottom: 10px;
 }
 .btn span {
   display: table-cell;

@@ -1,5 +1,5 @@
 <html>
-  <head>
+<head>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
 	<meta name="theme-color" content="#EEE0C3" />
 
@@ -7,63 +7,68 @@
 	<script src="js/peer.min.js"></script>
 	<script src="js/p2p_client.js"></script>
 	<link type="text/css" rel="stylesheet" href="css/p2p-mobile.css#1" />
-  </head>
-  
-  <body>
-  	<div id="connecting">
-  		<div style="text-align: center; width: 100%; margin: 6em auto;>">please wait while connecting to host... </div><br/>
-  		<div class="btn" onclick="javascript:location.reload();"><span>retry</span></div>
-  	</div>
-  	<div id="profile" class="hidden">
-  		<input id="name" type="text" style="width: 100%;" value="" placeholder="Name?"/>
-  		<div style="margin: 50px auto 50px auto; clear: both;">
-  		<img class="avatar avatar_1" src="img/avatar/1.png" onclick="javascript:selectAvatar(1)"/>
-  		<img class="avatar avatar_2" src="img/avatar/2.png" onclick="javascript:selectAvatar(2)"/>
-  		<img class="avatar avatar_3" src="img/avatar/3.png" onclick="javascript:selectAvatar(3)"/>
-  		<img class="avatar avatar_4" src="img/avatar/4.png" onclick="javascript:selectAvatar(4)"/>
-  		<img class="avatar avatar_5" src="img/avatar/5.png" onclick="javascript:selectAvatar(5)"/>
-  		<img class="avatar avatar_6" src="img/avatar/6.png" onclick="javascript:selectAvatar(6)"/>
-  		<img class="avatar avatar_7" src="img/avatar/7.png" onclick="javascript:selectAvatar(7)"/>
-  		<img class="avatar avatar_8" src="img/avatar/8.png" onclick="javascript:selectAvatar(8)"/>
-  		<img class="avatar avatar_9" src="img/avatar/9.png" onclick="javascript:selectAvatar(9)"/>
-  		<img class="avatar avatar_10" src="img/avatar/10.png" onclick="javascript:selectAvatar(10)"/>
-  		<img class="avatar avatar_11" src="img/avatar/11.png" onclick="javascript:selectAvatar(11)"/>
-  		<img class="avatar avatar_12" src="img/avatar/12.png" onclick="javascript:selectAvatar(12)"/>
-  		<img class="avatar avatar_13" src="img/avatar/13.png" onclick="javascript:selectAvatar(13)"/>
-  		<img class="avatar avatar_16" src="img/avatar/16.png" onclick="javascript:selectAvatar(16)"/>
-  		<img class="avatar avatar_17" src="img/avatar/17.png" onclick="javascript:selectAvatar(17)"/>
-  		<img class="avatar avatar_17" src="img/avatar/19.png" onclick="javascript:selectAvatar(19)"/>
-  		<img class="avatar avatar_17" src="img/avatar/20.png" onclick="javascript:selectAvatar(20)"/>
-  		<img class="avatar avatar_1" src="img/avatar/21.png" onclick="javascript:selectAvatar(21)"/>
-  		<img class="avatar avatar_2" src="img/avatar/22.png" onclick="javascript:selectAvatar(22)"/>
-  		<img class="avatar avatar_3" src="img/avatar/23.png" onclick="javascript:selectAvatar(23)"/>
-  		<img class="avatar avatar_4" src="img/avatar/24.png" onclick="javascript:selectAvatar(24)"/>
-  		<img class="avatar avatar_5" src="img/avatar/25.png" onclick="javascript:selectAvatar(25)"/>
-  		<img class="avatar avatar_6" src="img/avatar/26.png" onclick="javascript:selectAvatar(26)"/>
-  		<img class="avatar avatar_7" src="img/avatar/27.png" onclick="javascript:selectAvatar(27)"/>
-  		<img class="avatar avatar_8" src="img/avatar/28.png" onclick="javascript:selectAvatar(28)"/>
-  		<img class="avatar avatar_9" src="img/avatar/29.png" onclick="javascript:selectAvatar(29)"/>
-  		<img class="avatar avatar_17" src="img/avatar/30.png" onclick="javascript:selectAvatar(30)"/>
-  		<img class="avatar avatar_1" src="img/avatar/31.png" onclick="javascript:selectAvatar(31)"/>
-  		<img class="avatar avatar_2" src="img/avatar/32.png" onclick="javascript:selectAvatar(32)"/>
-  		<img class="avatar avatar_3" src="img/avatar/33.png" onclick="javascript:selectAvatar(33)"/>
-  		<img class="avatar avatar_4" src="img/avatar/34.png" onclick="javascript:selectAvatar(34)"/>
-  		<img class="avatar avatar_5" src="img/avatar/35.png" onclick="javascript:selectAvatar(35)"/>
-  		<img class="avatar avatar_6" src="img/avatar/36.png" onclick="javascript:selectAvatar(36)"/>
-  		</div>
-  		<div class="btn" onclick="javascript:register();"><span>Login</span></div>
-  	</div>
-	<div id="pokercards" class="container hidden">
-		<div class="card" onclick="javascript:sendPoints(0);">0</div>
-		<div class="card" onclick="javascript:sendPoints(1);">1</div>
-		<div class="card" onclick="javascript:sendPoints(2);">2</div>
-		<div class="card" onclick="javascript:sendPoints(3);">3</div>
-		<div class="card" onclick="javascript:sendPoints(5);">5</div>
-		<div class="card" onclick="javascript:sendPoints(8);">8</div>
-		<div class="card" onclick="javascript:sendPoints('K');">K</div>
-		<div class="card" onclick="javascript:sendPoints('?');">?</div>
-		<div class="card" onclick="javascript:sendPoints(undefined);">C</div>
-	<div style="display: block; clear: both;"></div>
-	</div>
-  </body>
+</head>
+
+<body>
+ <div id="connecting">
+    <div style="text-align: center; width: 100%; margin: 6em auto;>">please wait while connecting to host... </div><br/>
+    <div class="btn" onclick="javascript:location.reload();"><span>retry</span></div>
+</div>
+<div id="profile" class="hidden">
+    <input id="name" type="text" style="width: 100%;" value="" placeholder="Name?"/>
+    <div class="avatars">
+        <img class="avatar avatar_1" src="img/avatar/1.png" onclick="javascript:selectAvatar(1)"/>
+        <img class="avatar avatar_2" src="img/avatar/2.png" onclick="javascript:selectAvatar(2)"/>
+        <img class="avatar avatar_3" src="img/avatar/3.png" onclick="javascript:selectAvatar(3)"/>
+        <img class="avatar avatar_4" src="img/avatar/4.png" onclick="javascript:selectAvatar(4)"/>
+        <img class="avatar avatar_5" src="img/avatar/5.png" onclick="javascript:selectAvatar(5)"/>
+        <img class="avatar avatar_6" src="img/avatar/6.png" onclick="javascript:selectAvatar(6)"/>
+        <img class="avatar avatar_7" src="img/avatar/7.png" onclick="javascript:selectAvatar(7)"/>
+        <img class="avatar avatar_8" src="img/avatar/8.png" onclick="javascript:selectAvatar(8)"/>
+        <img class="avatar avatar_9" src="img/avatar/9.png" onclick="javascript:selectAvatar(9)"/>
+        <img class="avatar avatar_10" src="img/avatar/10.png" onclick="javascript:selectAvatar(10)"/>
+        <img class="avatar avatar_11" src="img/avatar/11.png" onclick="javascript:selectAvatar(11)"/>
+        <img class="avatar avatar_12" src="img/avatar/12.png" onclick="javascript:selectAvatar(12)"/>
+        <img class="avatar avatar_13" src="img/avatar/13.png" onclick="javascript:selectAvatar(13)"/>
+        <img class="avatar avatar_16" src="img/avatar/16.png" onclick="javascript:selectAvatar(16)"/>
+        <img class="avatar avatar_17" src="img/avatar/17.png" onclick="javascript:selectAvatar(17)"/>
+        <img class="avatar avatar_19" src="img/avatar/19.png" onclick="javascript:selectAvatar(19)"/>
+        <img class="avatar avatar_20" src="img/avatar/20.png" onclick="javascript:selectAvatar(20)"/>
+        <img class="avatar avatar_21" src="img/avatar/21.png" onclick="javascript:selectAvatar(21)"/>
+        <img class="avatar avatar_22" src="img/avatar/22.png" onclick="javascript:selectAvatar(22)"/>
+        <img class="avatar avatar_23" src="img/avatar/23.png" onclick="javascript:selectAvatar(23)"/>
+        <img class="avatar avatar_24" src="img/avatar/24.png" onclick="javascript:selectAvatar(24)"/>
+        <img class="avatar avatar_25" src="img/avatar/25.png" onclick="javascript:selectAvatar(25)"/>
+        <img class="avatar avatar_26" src="img/avatar/26.png" onclick="javascript:selectAvatar(26)"/>
+        <img class="avatar avatar_27" src="img/avatar/27.png" onclick="javascript:selectAvatar(27)"/>
+        <img class="avatar avatar_28" src="img/avatar/28.png" onclick="javascript:selectAvatar(28)"/>
+        <img class="avatar avatar_29" src="img/avatar/29.png" onclick="javascript:selectAvatar(29)"/>
+        <img class="avatar avatar_30" src="img/avatar/30.png" onclick="javascript:selectAvatar(30)"/>
+        <img class="avatar avatar_31" src="img/avatar/31.png" onclick="javascript:selectAvatar(31)"/>
+        <img class="avatar avatar_32" src="img/avatar/32.png" onclick="javascript:selectAvatar(32)"/>
+        <img class="avatar avatar_33" src="img/avatar/33.png" onclick="javascript:selectAvatar(33)"/>
+        <img class="avatar avatar_34" src="img/avatar/34.png" onclick="javascript:selectAvatar(34)"/>
+        <img class="avatar avatar_35" src="img/avatar/35.png" onclick="javascript:selectAvatar(35)"/>
+        <img class="avatar avatar_36" src="img/avatar/36.png" onclick="javascript:selectAvatar(36)"/>
+    </div>
+    <div class="btn" onclick="javascript:register();"><span>Login</span></div>
+</div>
+<table id="pokercards" class="container hidden">
+    <tr>
+      <td class="card" onclick="javascript:sendPoints(0, this);">0</td>
+      <td class="card" onclick="javascript:sendPoints(1, this);">1</td>
+      <td class="card" onclick="javascript:sendPoints(2, this);">2</td>
+    </tr>
+    <tr>
+      <td class="card" onclick="javascript:sendPoints(3, this);">3</td>
+      <td class="card" onclick="javascript:sendPoints(5, this);">5</td>
+      <td class="card" onclick="javascript:sendPoints(8, this);">8</td>
+    </tr>
+    <tr>
+      <td class="card" onclick="javascript:sendPoints('K', this);">K</td>
+      <td class="card" onclick="javascript:sendPoints('?', this);">?</td>
+      <td class="card" onclick="javascript:sendPoints(undefined, this);">C</td>
+    </tr>
+</table>
+</body>
 </html>
