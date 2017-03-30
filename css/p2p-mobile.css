@@ -15,17 +15,30 @@ body {
 
 .card {
     text-align: center;
-    border: 1px solid #EEE0C3;
+    border: 2px solid #EEE0C3;
     background-color: #5A6D73;
     font-size: 4em;
     color: #EEE0C3;
     display: table-cell;
     vertical-align: middle;
     cursor: pointer;
+    width: 33%;
+    user-select: none;
 }
+
+
 
 .card.selected {
     background-color: #738A92;
+}
+
+.card.clear {
+    background-color: #9E1616;
+    color:white
+}
+.card.clear.selected {
+    background-color: #9E1616;
+    color:white
 
 }
 
