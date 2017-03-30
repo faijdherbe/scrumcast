@@ -12,7 +12,11 @@ conn.on('data', function(data) {
 	if("welcome" == data.message) {
 	    $("#profile").addClass('hidden');
 		$('#pokercards').removeClass("hidden");
-	}
+	} else if("reset" == data.message) {
+        reset();
+    }
+
+    console.log('client message received: ', data.message);
 });
 
 conn.on('open', function(conn) {
@@ -32,6 +36,10 @@ function selectAvatar(id) {
     $(".avatar").removeClass("selected");
     $(".avatar_"+id).addClass("selected");
 	avatar_id = id;
+}
+
+function reset() {
+    $('.card').removeClass("selected");
 }
 
 function register() {

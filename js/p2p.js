@@ -79,9 +79,9 @@ function startCanvas(canvasID, peerJsKey) {
 
 		if(undefined != this.score) {
 			ctx.drawImage(
-    			this.img, 
-    			(width - w) * 0.5 + x, 
-    			ctx.canvas.height - 40 + offset - w, 
+    			this.img,
+    			(width - w) * 0.5 + x,
+    			ctx.canvas.height - 40 + offset - w,
     			w,
     			w
     		);
@@ -89,12 +89,12 @@ function startCanvas(canvasID, peerJsKey) {
 
 		var y = ctx.canvas.height - 40 + offset;
 
-		
+
 		ctx.font = "30px Georgia";
 		ctx.fillText(
 				this.name,
 				width * 0.5 + x,
-				ctx.canvas.height - 45 + offset - ( undefined != this.score ? w : 0)  
+				ctx.canvas.height - 45 + offset - ( undefined != this.score ? w : 0)
 			);
 
 		ctx.beginPath();
@@ -122,9 +122,9 @@ function startCanvas(canvasID, peerJsKey) {
 		}
 		redraw();
 	};
-	
+
 	return ctx;
-	
+
 }
 
 function redraw() {
@@ -146,9 +146,10 @@ function redraw() {
 function resetAll() {
 	cards.forEach(function(c) {
 		c.score = undefined;
+        c.connection.send({message: 'reset'})
 	});
 	redraw();
-	
+
 }
 
 
