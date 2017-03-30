@@ -6,7 +6,7 @@
 	"sizes" : "192x192",
 	"type": "image/png"
     }],
-    "start_url" : "/mobile.html",
+    "start_url" : "mobile.html",
     "display" : "standalone",
     "orientation" : "portrait"
 }
