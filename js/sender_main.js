@@ -289,10 +289,19 @@ function generateStoryContent(idx, story) {
 //$('.story_details').hide();
 var currentStoryIndex = -1;
 function selectStory(idx) {
-    if(-1 != currentStoryIndex) {
+	if(idx < 0 ) {
+		return;
+	}
+
+	if(idx > stories.length) {
+		return;
+	}
+
+	if(-1 != currentStoryIndex) {
 		// deselect
 		$('.story_' + currentStoryIndex).removeClass('active');
     }
+
 	markStory(idx, false);
 //    $('.story_details').show();
 
