@@ -5,7 +5,8 @@ var c = undefined;
 function startCanvas(canvasID, peerJsKey) {
 
 	var peer = new Peer('TOO', {
-		key: peerJsKey
+		key: peerJsKey,
+		host: 'http://192.168.10.19', port: 9000
 	});
 
 	peer.on('open', function(id) {
