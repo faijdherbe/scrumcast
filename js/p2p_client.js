@@ -1,5 +1,5 @@
-var peer = new Peer({key: 'jmikr170cgv0wwmi',
-		host: '192.168.10.19', port: 9000});
+var peer = new Peer({
+		host: 'too-peerjs.herokuapp.com', port: 9000});
 
 peer.on('open', function(id) {
 	console.log('My peer ID is: ' + id);
